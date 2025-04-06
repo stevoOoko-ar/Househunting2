@@ -3,3 +3,64 @@
 [04-Apr-2025 15:25:08 Europe/Berlin] PHP Warning:  mysqli_connect(): Error while reading greeting packet. PID=10856 in C:\xampp\htdocs\HouseSeeker\includes\db_connect.php on line 8
 [04-Apr-2025 15:25:08 Europe/Berlin] PHP Warning:  mysqli_connect(): (HY000/2006): MySQL server has gone away in C:\xampp\htdocs\HouseSeeker\includes\db_connect.php on line 8
 [04-Apr-2025 15:25:08 Europe/Berlin] PHP Fatal error:  Maximum execution time of 120 seconds exceeded in C:\xampp\htdocs\HouseSeeker\includes\db_connect.php on line 8
+[05-Apr-2025 12:04:28 Europe/Berlin] PHP Warning:  Undefined array key "status" in C:\xampp\htdocs\HouseSeeker\landlord\dashboard.php on line 36
+[05-Apr-2025 12:04:28 Europe/Berlin] PHP Warning:  Undefined array key "status" in C:\xampp\htdocs\HouseSeeker\landlord\dashboard.php on line 40
+[05-Apr-2025 12:04:49 Europe/Berlin] PHP Warning:  Undefined array key "status" in C:\xampp\htdocs\HouseSeeker\landlord\add_house.php on line 49
+[05-Apr-2025 12:04:49 Europe/Berlin] PHP Warning:  Undefined array key "status" in C:\xampp\htdocs\HouseSeeker\landlord\add_house.php on line 53
+[05-Apr-2025 12:07:05 Europe/Berlin] House Insert Error: Unknown column 'vacant_rooms' in 'field list'
+[05-Apr-2025 12:07:05 Europe/Berlin] PHP Warning:  Undefined array key "status" in C:\xampp\htdocs\HouseSeeker\landlord\add_house.php on line 49
+[05-Apr-2025 12:07:05 Europe/Berlin] PHP Warning:  Undefined array key "status" in C:\xampp\htdocs\HouseSeeker\landlord\add_house.php on line 53
+[05-Apr-2025 12:07:12 Europe/Berlin] PHP Warning:  Undefined array key "status" in C:\xampp\htdocs\HouseSeeker\landlord\dashboard.php on line 36
+[05-Apr-2025 12:07:12 Europe/Berlin] PHP Warning:  Undefined array key "status" in C:\xampp\htdocs\HouseSeeker\landlord\dashboard.php on line 40
+[05-Apr-2025 12:15:07 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_assoc(): Argument #1 ($result) must be of type mysqli_result, bool given in C:\xampp\htdocs\HouseSeeker\admin\payments.php:34
+Stack trace:
+#0 C:\xampp\htdocs\HouseSeeker\admin\payments.php(34): mysqli_fetch_assoc(false)
+#1 {main}
+  thrown in C:\xampp\htdocs\HouseSeeker\admin\payments.php on line 34
+[05-Apr-2025 12:15:26 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_assoc(): Argument #1 ($result) must be of type mysqli_result, bool given in C:\xampp\htdocs\HouseSeeker\admin\payments.php:34
+Stack trace:
+#0 C:\xampp\htdocs\HouseSeeker\admin\payments.php(34): mysqli_fetch_assoc(false)
+#1 {main}
+  thrown in C:\xampp\htdocs\HouseSeeker\admin\payments.php on line 34
+[05-Apr-2025 12:15:34 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_assoc(): Argument #1 ($result) must be of type mysqli_result, bool given in C:\xampp\htdocs\HouseSeeker\admin\payments.php:34
+Stack trace:
+#0 C:\xampp\htdocs\HouseSeeker\admin\payments.php(34): mysqli_fetch_assoc(false)
+#1 {main}
+  thrown in C:\xampp\htdocs\HouseSeeker\admin\payments.php on line 34
+[05-Apr-2025 12:15:38 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_assoc(): Argument #1 ($result) must be of type mysqli_result, bool given in C:\xampp\htdocs\HouseSeeker\admin\payments.php:34
+Stack trace:
+#0 C:\xampp\htdocs\HouseSeeker\admin\payments.php(34): mysqli_fetch_assoc(false)
+#1 {main}
+  thrown in C:\xampp\htdocs\HouseSeeker\admin\payments.php on line 34
+[05-Apr-2025 12:19:19 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_assoc(): Argument #1 ($result) must be of type mysqli_result, bool given in C:\xampp\htdocs\HouseSeeker\admin\payments.php:34
+Stack trace:
+#0 C:\xampp\htdocs\HouseSeeker\admin\payments.php(34): mysqli_fetch_assoc(false)
+#1 {main}
+  thrown in C:\xampp\htdocs\HouseSeeker\admin\payments.php on line 34
+[05-Apr-2025 12:19:27 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_assoc(): Argument #1 ($result) must be of type mysqli_result, bool given in C:\xampp\htdocs\HouseSeeker\admin\payments.php:34
+Stack trace:
+#0 C:\xampp\htdocs\HouseSeeker\admin\payments.php(34): mysqli_fetch_assoc(false)
+#1 {main}
+  thrown in C:\xampp\htdocs\HouseSeeker\admin\payments.php on line 34
+[05-Apr-2025 12:19:31 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_assoc(): Argument #1 ($result) must be of type mysqli_result, bool given in C:\xampp\htdocs\HouseSeeker\admin\payments.php:34
+Stack trace:
+#0 C:\xampp\htdocs\HouseSeeker\admin\payments.php(34): mysqli_fetch_assoc(false)
+#1 {main}
+  thrown in C:\xampp\htdocs\HouseSeeker\admin\payments.php on line 34
+[05-Apr-2025 12:19:38 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_assoc(): Argument #1 ($result) must be of type mysqli_result, bool given in C:\xampp\htdocs\HouseSeeker\admin\payments.php:34
+Stack trace:
+#0 C:\xampp\htdocs\HouseSeeker\admin\payments.php(34): mysqli_fetch_assoc(false)
+#1 {main}
+  thrown in C:\xampp\htdocs\HouseSeeker\admin\payments.php on line 34
+[05-Apr-2025 12:20:19 Europe/Berlin] PHP Warning:  Undefined array key "status" in C:\xampp\htdocs\HouseSeeker\landlord\dashboard.php on line 36
+[05-Apr-2025 12:20:19 Europe/Berlin] PHP Warning:  Undefined array key "status" in C:\xampp\htdocs\HouseSeeker\landlord\dashboard.php on line 40
+[05-Apr-2025 12:58:22 Europe/Berlin] PHP Warning:  Undefined array key "status" in C:\xampp\htdocs\HouseSeeker\landlord\add_house.php on line 49
+[05-Apr-2025 12:58:22 Europe/Berlin] PHP Warning:  Undefined array key "status" in C:\xampp\htdocs\HouseSeeker\landlord\add_house.php on line 53
+[05-Apr-2025 12:58:22 Europe/Berlin] PHP Warning:  Undefined array key "status" in C:\xampp\htdocs\HouseSeeker\landlord\add_house.php on line 49
+[05-Apr-2025 12:58:22 Europe/Berlin] PHP Warning:  Undefined array key "status" in C:\xampp\htdocs\HouseSeeker\landlord\add_house.php on line 53
+[05-Apr-2025 13:14:36 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_assoc(): Argument #1 ($result) must be of type mysqli_result, bool given in C:\xampp\htdocs\HouseSeeker\landlord\payments.php:48
+Stack trace:
+#0 C:\xampp\htdocs\HouseSeeker\landlord\payments.php(48): mysqli_fetch_assoc(false)
+#1 {main}
+  thrown in C:\xampp\htdocs\HouseSeeker\landlord\payments.php on line 48
+[05-Apr-2025 13:20:46 Europe/Berlin] House Insert Error: Unknown column 'vacant_rooms' in 'field list'

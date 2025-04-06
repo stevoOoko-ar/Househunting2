@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               VALUES ('$title', '$location', '$price', '$type','$vacant_rooms','$descriptions', '$landlord_id', '$image', 'available')";
     
     if (mysqli_query($conn, $query)) {
-        echo "<div class='alert alert-success'>House added successfully!</div>";
+        $success_message = "House added successfully!";
     } else {
         error_log("House Insert Error: " . mysqli_error($conn));
     }
@@ -41,17 +41,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add House</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 <div class="container mt-5" style="padding-top: 70px;">
-<?php while ($data = mysqli_fetch_assoc($status)) { ?>
+    <?php if (isset($success_message)): ?>
+        <div class="alert alert-success animate__animated animate__fadeInDown" role="alert">
+            <?php echo $success_message; ?>
+        </div>
+    <?php endif; ?>
+    <?php while ($data = mysqli_fetch_assoc($status)) { ?>
         <?php if ($data['status'] == 'Rejected'): ?>
-                <div class="alert alert-danger">
-                    Sorry, you have been Rejected.
+            <div class="alert alert-danger">
+                Sorry, you have been Rejected.
             </div>
         <?php elseif ($data['status'] == "Pending"): ?>
-            <div class="alert alert-info">Please your registration is not yet confirmed, if no payments made <a href="landlord_payments.php">make payments</a> to start posting your houses.</div>
+            <div class="alert alert-info">
+                Please your registration is not yet confirmed, if no payments made <a href="landlord_payments.php">make payments</a> to start posting your houses.
             </div>
         <?php else : ?>
             <h2>Add a New House</h2>
@@ -86,27 +93,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="text" name="descriptions" class="form-control" required>
                 </div>
                 <div class="col-md-4">
-                    <label>Upload Image of format(png,jpg,jpeg)</label>
-                    <input type="file" id="file" name="image" class="form-control" required>
+                    <label>Upload Image </label>
+                    <input type="file" accept="image/*" name="image" class="form-control" required>
                 </div>
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary">Add House</button>
                 </div>
             </form>
         <?php endif; ?>
-<?php } ?>
+    <?php } ?>
 </div>
-        </body>
-        </html>
+</body>
+</html>
 <script>
-    let file = document.getElementById('file');
-    if (file.addEventListener('change', function() {
-        let file = this.files[0];
-        let fileType = file.type.split('/')[1];
-        if (fileType === 'mp3' && fileType === 'mp4' && fileType === 'pdf' && fileType === 'gif') {
-            alert('Invalid file format. Please upload a valid image file.');
-            this.value = '';
+    // Optional: Automatically hide the success message after a few seconds
+    setTimeout(() => {
+        const alert = document.querySelector('.alert-success');
+        if (alert) {
+            alert.classList.add('animate__fadeOutUp');
+            setTimeout(() => alert.remove(), 1000);
         }
-    }));
+    }, 3000);
 </script>
 <?php include '../includes/footer.php'; ?>

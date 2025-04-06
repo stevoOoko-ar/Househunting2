@@ -33,16 +33,18 @@ $result = mysqli_query($conn, $query);
 <body>
 <div class="container mt-5" style="padding-top: 70px;">
 <?php while ($data = mysqli_fetch_assoc($status)) { ?>
-        <?php if ($data['status'] == 'Rejected'): ?>
+        <?php 
+        $user_status = $data['status'] ?? null; // Safely access the 'status' key
+        if ($user_status === 'Rejected'): ?>
                 <div class="alert alert-danger">
                     Sorry, you have been Rejected.
-            </div>
-        <?php elseif ($data['status'] == "Pending"): ?>
+                </div>
+        <?php elseif ($user_status === "Pending"): ?>
             <div class="alert alert-info">
-                Application status Pending. Wait for approval. if payment not made <a href="landlord_payments.php">make payments</a> to start posting your houses.
+                Application status Pending. Wait for approval. If payment not made <a href="landlord_payments.php">make payments</a> to start posting your houses.
             </div>
         <?php else : ?>
-            <h2>Welcome,<?php echo $landlord_name; ?></h2>
+            <h2>Welcome, <?php echo htmlspecialchars($landlord_name); ?></h2>
             <p class="lead">Manage your property listings and applications.</p>
 
             <div class="row">
@@ -69,19 +71,30 @@ $result = mysqli_query($conn, $query);
                 <div class="row">
                 <?php while ($row = mysqli_fetch_assoc($result)) { ?>
                     <div class="col-md-4 mb-4">
-                        <div class="card shadow-sm" style="margin-top: 20px;">
-                            <img src="/HouseSeeker/assets/images/<?php echo $row['images']; ?>" class="card-img-top" alt="House Image" style = "width: 100%; height: 150px; border-radius: 5px 5px 0 0;" >
-                            <div class="card-body" style = "width: 100%; height: 200px; border: 1px solid black; padding: 5px; display: flex; flex-direction: column; justify-content:space-between;">
-                                <h5 class="card-title"><?php echo $row['title']; ?></h5>
-                                <p class="card-text"><?php echo $row['location']; ?></p>
-                                <p class="card-text"><?php echo $row['vacant_rooms']; ?> Vacant Rooms</p>
-                                <p class="card-text"><strong>Rent:</strong> KES <?php echo $row['price']; ?> /month</p>
-                                <a href="update_house.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">View Details</a>
+                        <div class="card shadow-sm" style="border-radius: 10px; overflow: hidden;">
+                            <img src="/HouseSeeker/assets/images/<?php echo $row['images']; ?>" 
+                                 class="card-img-top" 
+                                 alt="House Image" 
+                                 style="width: 100%; height: 200px; object-fit: cover;">
+                            <div class="card-body" style="padding: 15px;">
+                                <h5 class="card-title text-truncate" style="font-weight: bold;"><?php echo $row['title']; ?></h5>
+                                <p class="card-text text-muted mb-2">
+                                    <i class="bi bi-geo-alt-fill"></i> <?php echo $row['location']; ?>
+                                </p>
+                                <p class="card-text mb-2">
+                                    <strong>Vacant Rooms:</strong> <?php echo $row['vacant_rooms']; ?>
+                                </p>
+                                <p class="card-text mb-3">
+                                    <strong>Rent:</strong> KES <?php echo number_format($row['price']); ?> /month
+                                </p>
+                                <a href="update_house.php?id=<?php echo $row['id']; ?>" class="btn btn-primary w-100">
+                                    View Details
+                                </a>
                             </div>
                         </div>
                     </div>
-                <?php };?>
-            </div>
+                <?php } ?>
+                </div>
             <?php endif; ?>
         <?php endif; ?>
 <?php } ?>

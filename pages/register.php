@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <p class="mt-3 text-center">Already have an account? <a href="login.php">Login</a></p>
 </div>
 
-<!-- 🧠 JavaScript Logic -->
+<!--  JavaScript Logic -->
 <script>
 function togglePassword() {
     const passwordInput = document.getElementById('password');

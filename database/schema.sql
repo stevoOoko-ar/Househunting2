@@ -22,12 +22,14 @@ CREATE TABLE houses (
     location VARCHAR(255) NOT NULL,
     type ENUM('single', 'bedsitter', 'self-contained', 'shared') NOT NULL,
     price DECIMAL(10,2) NOT NULL,
+    vacant_rooms INT(11) NOT NULL,
     availability ENUM('available', 'occupied') DEFAULT 'available',
     images TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    descriptions text null,
+    descriptions TEXT NULL,
     FOREIGN KEY (landlord_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
 
 -- Create Reviews Table (Student House Ratings)
 CREATE TABLE reviews (
