@@ -2,6 +2,12 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+
+// Initialize shortlisted houses count if not already set
+if (!isset($_SESSION['shortlisted_count'])) {
+    $_SESSION['shortlisted_count'] = 0;
+}
+
 include '../includes/config.php';
 include '../includes/header.php';
 ini_set('log_errors', 1);
@@ -62,7 +68,21 @@ if ($stmt) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>University House Seeker</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .card:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+        }
+    </style>
+    <style>
+        .btn-primary:hover {
+            background-color: #2575fc;
+            transform: scale(1.1);
+            transition: all 0.3s ease;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5 text-center" style = "padding-top: 50px;">
@@ -103,23 +123,38 @@ if ($stmt) {
         <div class="row">
         <?php while ($row = mysqli_fetch_assoc($result)) { ?>
             <div class="col-md-4 mb-4">
-                <div class="card shadow-sm">
-                    <img src="/HouseSeeker/assets/images/<?php echo $row['images']; ?>" class="card-img-top" alt="House Image" style = "height: 250px;">
-                    <div class="card-body" style = "width: 100%; height: 200px; border: 1px solid black; padding: 5px; display: flex; flex-direction: column; justify-content:space-between;">
-                        <h5 class="card-title"><?php echo $row['title']; ?></h5>
-                        <p class="card-text"><?php echo $row['location']; ?> Meru</p>
-                        <p class="card-text"><?php echo $row['vacant_rooms']; ?> Vacant Rooms</p>
-                        <p class="card-text"><strong>Rent:</strong> KES <?php echo $row['price']; ?>/month</p>
-                        <a href="/HouseSeeker/student/view_house.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">View Details</a>
+                <div class="card shadow-sm rounded h-100">
+                    <img src="/HouseSeeker/assets/images/<?php echo $row['images']; ?>" class="card-img-top rounded-top" alt="House Image" style="height: 250px; object-fit: cover;">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <div>
+                            <h5 class="card-title text-primary"><?php echo $row['title']; ?></h5>
+                            <p class="card-text text-muted mb-1"><i class="bi bi-geo-alt"></i> <?php echo $row['location']; ?>, Meru</p>
+                            <p class="card-text text-muted mb-1"><i class="bi bi-door-open"></i> <?php echo $row['vacant_rooms']; ?> Vacant Rooms</p>
+                            <p class="card-text text-dark"><strong>Rent:</strong> KES <?php echo $row['price']; ?>/month</p>
+                        </div>
+                        <div>
+                            <a href="/HouseSeeker/student/view_house.php?id=<?php echo $row['id']; ?>" class="btn btn-primary mt-2 w-100">View Details</a>
+                            <form method="POST" action="/HouseSeeker/student/shortlist.php" class="mt-2">
+                                <input type="hidden" name="house_id" value="<?php echo $row['id']; ?>">
+                                <button type="submit" class="btn btn-outline-success w-100">Shortlist</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        <?php };?>
-    </div>
+        <?php }; ?>
+    </div>
     <?php endif; ?>
     </div>
     
-</div>
+    <div class="position-fixed bottom-0 end-0 m-4">
+        <a href="/HouseSeeker/student/shortlist.php" class="btn btn-primary position-relative rounded-circle p-3 shadow" style="width: 60px; height: 60px;">
+            <i class="bi bi-basket" style="font-size: 1.5rem;"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                <?php echo isset($_SESSION['shortlisted_count']) ? $_SESSION['shortlisted_count'] : 0; ?>
+            </span>
+        </a>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

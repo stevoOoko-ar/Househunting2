@@ -111,15 +111,23 @@ if ($stmt) {
 <div class="container">
     <div class="row">
         <?php if ($result && mysqli_num_rows($result) > 0) { while ($row = mysqli_fetch_assoc($result)) { ?>
-            <div class="col-md-4 mb-4" data-aos="zoom-in">
-                <div class="card shadow-sm">
-                    <img src="/HouseSeeker/assets/images/<?php echo $row['images']; ?>" class="card-img-top" alt="House Image" style="width: 100%; height: 250px;">
-                    <div class="card-body">
-                        <h5 class="card-title"> <?php echo $row['title']; ?> </h5>
-                        <p class="card-text"> <?php echo $row['location']; ?> </p>
-                        <p class="card-text"> <?php echo $row['descriptions']; ?> </p>
-                        <p class="card-text"><strong>Rent:</strong> KES <?php echo number_format($row['price']); ?>/month</p>
-                        <a href="/HouseSeeker/student/view_house.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">View Details</a>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm rounded h-100">
+                    <img src="/HouseSeeker/assets/images/<?php echo $row['images']; ?>" class="card-img-top rounded-top" alt="House Image" style="height: 250px; object-fit: cover;">
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <div>
+                            <h5 class="card-title text-primary"><?php echo $row['title']; ?></h5>
+                            <p class="card-text text-muted mb-1"><i class="bi bi-geo-alt"></i> <?php echo $row['location']; ?>, Meru</p>
+                            <p class="card-text text-muted mb-1"><i class="bi bi-door-open"></i> <?php echo $row['vacant_rooms']; ?> Vacant Rooms</p>
+                            <p class="card-text text-dark"><i class="bi bi-currency-dollar"></i> <strong>Rent:</strong> KES <?php echo $row['price']; ?>/month</p>
+                        </div>
+                        <div>
+                            <a href="/HouseSeeker/student/view_house.php?id=<?php echo $row['id']; ?>" class="btn btn-primary mt-2 w-100">View Details</a>
+                            <form method="POST" action="/HouseSeeker/student/shortlist.php" class="mt-2">
+                                <input type="hidden" name="house_id" value="<?php echo $row['id']; ?>">
+                                <button type="submit" class="btn btn-outline-success w-100">Shortlist</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
