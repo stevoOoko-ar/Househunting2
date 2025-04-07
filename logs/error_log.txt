@@ -64,3 +64,30 @@ Stack trace:
 #1 {main}
   thrown in C:\xampp\htdocs\HouseSeeker\landlord\payments.php on line 48
 [05-Apr-2025 13:20:46 Europe/Berlin] House Insert Error: Unknown column 'vacant_rooms' in 'field list'
+[06-Apr-2025 17:51:44 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: mysqli_stmt_execute(): Argument #1 ($statement) must be of type mysqli_stmt, bool given in C:\xampp\htdocs\HouseSeeker\student\apply.php:61
+Stack trace:
+#0 C:\xampp\htdocs\HouseSeeker\student\apply.php(61): mysqli_stmt_execute(false)
+#1 {main}
+  thrown in C:\xampp\htdocs\HouseSeeker\student\apply.php on line 61
+[06-Apr-2025 18:07:41 Europe/Berlin] MySQL Prepare Error: Unknown column 'student_email' in 'field list'
+[07-Apr-2025 07:28:51 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: The number of variables must match the number of parameters in the prepared statement in C:\xampp\htdocs\HouseSeeker\student\apply.php:64
+Stack trace:
+#0 C:\xampp\htdocs\HouseSeeker\student\apply.php(64): mysqli_stmt_bind_param(Object(mysqli_stmt), 'iissss', 2, 3, 'meryl@gmail.com', '07123456788', 'i want the hous...', 'Pending')
+#1 {main}
+  thrown in C:\xampp\htdocs\HouseSeeker\student\apply.php on line 64
+[07-Apr-2025 07:43:19 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: The number of variables must match the number of parameters in the prepared statement in C:\xampp\htdocs\HouseSeeker\student\apply.php:64
+Stack trace:
+#0 C:\xampp\htdocs\HouseSeeker\student\apply.php(64): mysqli_stmt_bind_param(Object(mysqli_stmt), 'iissss', 2, 3, 'meryl@gmail.com', '07123456788', 'i want the hous...', 'Pending')
+#1 {main}
+  thrown in C:\xampp\htdocs\HouseSeeker\student\apply.php on line 64
+[07-Apr-2025 07:56:44 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: mysqli_stmt_bind_param(): Argument #1 ($statement) must be of type mysqli_stmt, bool given in C:\xampp\htdocs\HouseSeeker\student\applications.php:55
+Stack trace:
+#0 C:\xampp\htdocs\HouseSeeker\student\applications.php(55): mysqli_stmt_bind_param(false, 'ii', '3', 2)
+#1 {main}
+  thrown in C:\xampp\htdocs\HouseSeeker\student\applications.php on line 55
+[07-Apr-2025 08:15:41 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_assoc(): Argument #1 ($result) must be of type mysqli_result, array given in C:\xampp\htdocs\HouseSeeker\landlord\approve_application.php:20
+Stack trace:
+#0 C:\xampp\htdocs\HouseSeeker\landlord\approve_application.php(20): mysqli_fetch_assoc(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\HouseSeeker\landlord\approve_application.php on line 20
+[07-Apr-2025 08:26:33 Europe/Berlin] MySQL Prepare Error: Unknown column 'h.rent' in 'where clause'

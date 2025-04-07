@@ -52,13 +52,19 @@ $result = mysqli_stmt_get_result($stmt);
                 // Fetch total amount paid for the house
                 $payment_query = "SELECT SUM(amount) AS total_paid FROM payments WHERE user_id = ? AND house_id = ?";
                 $payment_stmt = mysqli_prepare($conn, $payment_query);
-                mysqli_stmt_bind_param($payment_stmt, "ii", $user_id, $house_id);
-                mysqli_stmt_execute($payment_stmt);
-                $payment_result = mysqli_stmt_get_result($payment_stmt);
-                $payment_data = mysqli_fetch_assoc($payment_result);
-                $total_paid = $payment_data['total_paid'] ?? 0;
+                if ($payment_stmt) {
+                    mysqli_stmt_bind_param($payment_stmt, "ii", $user_id, $house_id);
+                    mysqli_stmt_execute($payment_stmt);
+                    $payment_result = mysqli_stmt_get_result($payment_stmt);
+                    $payment_data = mysqli_fetch_assoc($payment_result);
+                    $total_paid = $payment_data['total_paid'] ?? 0;
 
-                $balance = $rent_amount - $total_paid;
+                    $balance = $rent_amount - $total_paid;
+                } else {
+                    error_log("MySQL Prepare Error (Payments Query): " . mysqli_error($conn));
+                    echo "<div class='alert alert-danger'>An error occurred while preparing the payments query.</div>";
+                    $balance = $rent_amount; // Default balance if query fails
+                }
             ?>
                 <tr>
                     <td><?php echo htmlspecialchars($row['title']); ?></td>

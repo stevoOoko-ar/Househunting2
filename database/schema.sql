@@ -51,9 +51,16 @@ CREATE TABLE applications (
     visit_date DATE NOT NULL,
     status ENUM('Pending', 'Approved', 'Rejected') DEFAULT 'Pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    -- New columns added below
+    student_email VARCHAR(255),
+    phone_number VARCHAR(20),
+    message TEXT,
+
     FOREIGN KEY (house_id) REFERENCES houses(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
 
 -- Create Messages Table (Landlord-Student Chat System)
 CREATE TABLE messages (
@@ -69,7 +76,7 @@ CREATE TABLE messages (
 -- Create Payments Table (Rent Payments & Deposits)
 CREATE TABLE payments (
     id INT(11) AUTO_INCREMENT PRIMARY KEY,
-    tenant_id INT(11) NOT NULL,
+    user_id INT(11) NOT NULL,
     house_id INT(11) NOT NULL,
     amount DECIMAL(10,2) NOT NULL,
     payment_method ENUM('MPESA', 'Bank Transfer') NOT NULL,

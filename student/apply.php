@@ -15,6 +15,10 @@ if (isset($_GET['id'])) {
               JOIN users u ON h.landlord_id = u.id 
               WHERE h.id = ?";
     $stmt = mysqli_prepare($conn, $query);
+    if (!$stmt) {
+        error_log("MySQL Prepare Error: " . mysqli_error($conn));
+        echo "<div class='alert alert-danger'>An error occurred while preparing the query.</div>";
+    }
     mysqli_stmt_bind_param($stmt, "i", $house_id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
@@ -25,7 +29,7 @@ if (isset($_GET['id'])) {
 // Get current user details
 $user_id = 0;
 $user_email = '';
-$user_phone = '';
+$phone_number = ''; // Fixed the missing $ symbol
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     $user_query = "SELECT email,phone FROM users WHERE id = ?";
@@ -43,30 +47,34 @@ ini_set('log_errors', 1);
 ini_set('error_log', '../logs/error_log.txt');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Extract and validate form data
     $house_id = isset($_POST['house_id']) ? intval($_POST['house_id']) : 0;
     $user_id = isset($_POST['user_id']) ? intval($_POST['user_id']) : 0;
     $student_email = isset($_POST['student_email']) ? trim($_POST['student_email']) : '';
     $phone_number = isset($_POST['phone_number']) ? trim($_POST['phone_number']) : '';
     $message = isset($_POST['message']) ? trim($_POST['message']) : '';
     $status = 'Pending';
-    
+
     if ($house_id <= 0 || $user_id <= 0 || empty($student_email) || empty($message)) {
         echo "<div class='alert alert-danger'>All fields are required</div>";
     } else {
-        // Prepare SQL statement
-        $query = "INSERT INTO applications (house_id, user_id, student_email,phone_number, message, status) VALUES ('$house_id','$user_id','$student_email','$phone_number','$message','$status')";
+        $query = "INSERT INTO applications (house_id, user_id, student_email, phone_number, message, status) 
+                  VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($conn, $query);
-        
-        if (mysqli_stmt_execute($stmt)) {
-            echo "<div class='alert alert-success'>Application submitted successfully!</div>";
-            header("Location: applications.php");
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "iissss", $house_id, $user_id, $student_email, $phone_number, $message, $status);
+            if (mysqli_stmt_execute($stmt)) {
+                echo "<div class='alert alert-success'>Application submitted successfully!</div>";
+                header("Location: applications.php");
+                exit();
+            } else {
+                error_log("MySQL Execute Error: " . mysqli_error($conn));
+                echo "<div class='alert alert-danger'>Error submitting application.</div>";
+            }
+            mysqli_stmt_close($stmt);
         } else {
-            error_log("MySQL Error: " . mysqli_error($conn));
-            echo "<div class='alert alert-danger'>Error submitting application.</div>";
+            error_log("MySQL Prepare Error: " . mysqli_error($conn));
+            echo "<div class='alert alert-danger'>An error occurred while preparing the query.</div>";
         }
-        mysqli_stmt_close($stmt);
-    
     }
 }
 ?>
