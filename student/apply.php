@@ -63,8 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($stmt) {
             mysqli_stmt_bind_param($stmt, "iissss", $house_id, $user_id, $student_email, $phone_number, $message, $status);
             if (mysqli_stmt_execute($stmt)) {
-                echo "<div class='alert alert-success'>Application submitted successfully!</div>";
-                header("Location: applications.php");
+                $_SESSION['success_message'] = "Application submitted successfully!";
+                header("Location: apply.php?id=$house_id");
                 exit();
             } else {
                 error_log("MySQL Execute Error: " . mysqli_error($conn));
@@ -89,6 +89,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
 <div class="container mt-5" style="padding-top: 70px;">
+    <?php if (isset($_SESSION['success_message'])): ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?php echo $_SESSION['success_message']; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php unset($_SESSION['success_message']); ?>
+    <?php endif; ?>
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <div class="card">
@@ -151,9 +158,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
 </div>
-                        </body>
-                        </html>
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('applicationForm');
@@ -171,6 +175,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-
 <?php include '../includes/footer.php'; ?>
 

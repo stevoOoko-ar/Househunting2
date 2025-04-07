@@ -91,3 +91,8 @@ Stack trace:
 #1 {main}
   thrown in C:\xampp\htdocs\HouseSeeker\landlord\approve_application.php on line 20
 [07-Apr-2025 08:26:33 Europe/Berlin] MySQL Prepare Error: Unknown column 'h.rent' in 'where clause'
+[07-Apr-2025 08:41:47 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: mysqli_fetch_assoc(): Argument #1 ($result) must be of type mysqli_result, array given in C:\xampp\htdocs\HouseSeeker\landlord\approve_application.php:20
+Stack trace:
+#0 C:\xampp\htdocs\HouseSeeker\landlord\approve_application.php(20): mysqli_fetch_assoc(Array)
+#1 {main}
+  thrown in C:\xampp\htdocs\HouseSeeker\landlord\approve_application.php on line 20
